@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, OnDestroy  {
 
    ngOnInit() {
 
-    // change 2000 to whatever number
+    // change 5000 to whatever number
     const observable = interval(5000);
     this.heartBeatSubscription  = observable.pipe(
       // see if flatMap can be used to remove the nested subscription
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy  {
     let headers : HttpHeaders = new HttpHeaders();
     headers.append('Authorization', `Basic ${hash}`);
     return this.heartBeatHttp
-      .post('http://localhost:8000/csp/imrestbb/v1/session/heartbeat', '', { headers : headers});
+      .post('http://localhost:8000/csp/imrestbb/v1/session/heartbeat', '', { headers : headers}); // angular is unable to pass these headers here. Add them to interceptor forecfully
   }
 
   logout() {
