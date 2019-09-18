@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Subscription, interval } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'my-app',
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit, OnDestroy  {
     const observable = interval(5000);
     this.heartBeatSubscription  = observable.pipe(
       // see if flatMap can be used to remove the nested subscription
-      // flatMap(() = > { this.callHeartBeat())
+      flatMap(() => this.callHeartBeat())
     )
     .subscribe(
       intervalResponse => {
